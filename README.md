@@ -86,3 +86,29 @@ Task 10 completed on thread pool-1-thread-1
 Task 9 completed on thread pool-1-thread-3
 All tasks completed.
 ```
+
+**Key Points About shutdown()**
+**No New Tasks:** After calling shutdown(), the executor will reject any new tasks submitted to it. Any attempt to submit a new task will result in a RejectedExecutionException.
+**Continues Running Submitted Tasks:** All tasks submitted before shutdown() was called will continue to run until they are finished.
+**Does Not Block:** The shutdown() method itself does not block; it simply initiates the shutdown process and returns immediately.
+
+**Waiting for Task Completion: Using awaitTermination()**
+If you want to wait for all tasks to finish after calling shutdown(), you should use awaitTermination() in combination with shutdown(). Here’s how:
+
+```java
+executor.shutdown(); // Initiates shutdown, allowing submitted tasks to complete
+try {
+    // Wait for tasks to complete or time out after a specific period
+    if (!executor.awaitTermination(1, TimeUnit.MINUTES)) {
+        executor.shutdownNow(); // Forces shutdown if tasks are still running after timeout
+    }
+} catch (InterruptedException e) {
+    executor.shutdownNow(); // If interrupted, force shutdown
+}
+```
+`awaitTermination(long timeout, TimeUnit unit):` This method blocks until either:
+1. All tasks complete execution.
+2. The specified timeout period expires.
+3. The current thread is interrupted.
+
+If awaitTermination() times out, you can decide to force a shutdown with shutdownNow(), which attempts to stop all running tasks immediately.
