@@ -88,8 +88,11 @@ All tasks completed.
 ```
 
 **Key Points About shutdown()**
+
 **No New Tasks:** After calling shutdown(), the executor will reject any new tasks submitted to it. Any attempt to submit a new task will result in a RejectedExecutionException.
+
 **Continues Running Submitted Tasks:** All tasks submitted before shutdown() was called will continue to run until they are finished.
+
 **Does Not Block:** The shutdown() method itself does not block; it simply initiates the shutdown process and returns immediately.
 
 **Waiting for Task Completion: Using awaitTermination()**
