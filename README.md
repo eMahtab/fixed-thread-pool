@@ -1,11 +1,13 @@
 # Thread Pool (fixed thread pool)
-ExecutorService Creation:
+**ExecutorService Creation:**
 
 Executors.newFixedThreadPool(4) creates a thread pool with 4 threads. This means up to 4 tasks can run concurrently.
-Submitting Tasks:
+
+**Submitting Tasks:**
 
 A loop is used to create and submit 10 Task instances to the executor. Each Task object represents a unit of work to be performed by a thread.
-Task Execution:
+
+**Task Execution:**
 
 The Task class implements Runnable. Each task sleeps for a random period of up to 1 second to simulate a workload, and then it prints its start and end status.
 ```java
