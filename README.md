@@ -116,6 +116,6 @@ try {
 
 If `awaitTermination()` times out, you can decide to force a shutdown with shutdownNow(), which attempts to stop all running tasks immediately.
 
-## What if, shutdown is handled properly:
+## What if, shutdown is not handled properly:
 
 If `shutdown()` is not called, the threads in the thread pool will continue to exist and consume system resources, even after they finish executing the submitted tasks. This can lead to resource leaks, particularly in applications that create and discard thread pools frequently.
